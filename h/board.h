@@ -17,6 +17,7 @@ class Board{
   
         ~Board()=default;
         Board(bool isRandom=true);
+        Board(std::vector<int> numbers,bool isRandom = false);
         void disp();
         bool moveEmptyTile(Direction direction);
         std::vector<std::vector<int>> getTable(){return Table;}

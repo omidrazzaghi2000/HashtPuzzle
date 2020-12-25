@@ -69,7 +69,15 @@ Board::Board(bool isRandom){
             Table.push_back(Row);
         }    
 }
-
+Board::Board(std::vector<int> Numbers,bool isRandom){
+    for(size_t i = 0 ; i < boardSize ; i++){
+            std::vector<int> Row;
+            for (size_t j = 0 ; j < boardSize ; j++){
+                Row.push_back(Numbers.at((j)+i*boardSize));
+            }
+            Table.push_back(Row);
+        } 
+}
 void Board::disp(){
     std::cout << "The Board : " << std::endl;
     for(size_t i = 0 ; i < boardSize ; i++){
