@@ -1,57 +1,84 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class UserInterface {
-  comment {User interface for table} open selected
-  xywh {112 135 290 355} type Double visible
+  comment {User interface for table} open
+  xywh {485 79 315 520} type Double box ENGRAVED_BOX color 64 labelfont 1 labelcolor 7 visible
 } {
-  Fl_Button {} {
+  Fl_Button solve {
     label solve
-    xywh {110 50 70 20} box ROUNDED_BOX shortcut 0x73 color 40 labeltype SHADOW_LABEL labelfont 4 labelcolor 53
+    xywh {131 175 70 25} box GTK_UP_BOX shortcut 0x73 color 73 labelfont 1 labelcolor 83
   }
-  Fl_Button {} {
-    label insert
-    xywh {210 15 70 20} box ROUNDED_BOX shortcut 0xff0d color 40 labeltype SHADOW_LABEL labelfont 4 labelcolor 53
-  }
-  Fl_Input {} {
-    xywh {20 10 180 30}
+  Fl_Input goal_input {
+    label {Insert Goal : }
+    xywh {110 90 180 30} labelfont 1 labelcolor 83 textsize 12
   }
   Fl_Tile {} {
-    label Table open
-    xywh {25 95 240 240} box THIN_DOWN_BOX
+    label Table
+    xywh {60 230 210 210} box THIN_UP_BOX color 123 labelfont 1 labelcolor 83
   } {
     Fl_Box {} {
       label 1
-      xywh {30 100 70 70} box UP_BOX color 25 labelsize 32 labelcolor 57
-    }
-    Fl_Box {} {
-      label 4
-      xywh {30 180 70 70} box UP_BOX color 25 labelsize 32 labelcolor 57
-    }
-    Fl_Box {} {
-      label 7
-      xywh {30 260 70 70} box UP_BOX color 25 labelsize 32 labelcolor 57
-    }
-    Fl_Box {} {
-      label 5
-      xywh {110 180 70 70} box UP_BOX color 25 labelsize 32 labelcolor 57
+      xywh {60 230 70 70} box GTK_UP_BOX color 73 selection_color 48 labelfont 1 labelsize 32 labelcolor 83
     }
     Fl_Box {} {
       label 2
-      xywh {110 100 70 70} box UP_BOX color 25 labelsize 32 labelcolor 57
+      xywh {130 230 70 70} box GTK_UP_BOX color 73 labelfont 1 labelsize 32 labelcolor 83
     }
     Fl_Box {} {
-      label 8
-      xywh {110 260 70 70} box UP_BOX color 25 labelsize 32 labelcolor 57
+      label 2
+      xywh {200 230 70 70} box GTK_UP_BOX color 73 labelfont 1 labelsize 32 labelcolor 83
     }
     Fl_Box {} {
-      label 3
-      xywh {190 100 70 70} box UP_BOX color 25 labelsize 32 labelcolor 57
+      label 1
+      xywh {60 300 70 70} box GTK_UP_BOX color 73 selection_color 48 labelfont 1 labelsize 32 labelcolor 83
     }
     Fl_Box {} {
-      label 6
-      xywh {190 180 70 70} box UP_BOX color 25 labelsize 32 labelcolor 57
+      label 1
+      xywh {130 300 70 70} box GTK_UP_BOX color 73 selection_color 48 labelfont 1 labelsize 32 labelcolor 83
+    }
+    Fl_Box {} {
+      label 1
+      xywh {200 300 70 70} box GTK_UP_BOX color 73 selection_color 48 labelfont 1 labelsize 32 labelcolor 83
+    }
+    Fl_Box {} {
+      label 1
+      xywh {60 370 70 70} box GTK_UP_BOX color 73 selection_color 48 labelfont 1 labelsize 32 labelcolor 83
+    }
+    Fl_Box {} {
+      label 1
+      xywh {130 370 70 70} box GTK_UP_BOX color 73 selection_color 48 labelfont 1 labelsize 32 labelcolor 83
+    }
+  }
+  Fl_Input user_input_table {
+    label {Insert Start : }
+    xywh {110 50 180 30} labelfont 1 labelcolor 83 textsize 12
+  }
+  Fl_Value_Output level_output_box {
+    label Level
+    xywh {210 445 60 25} box PLASTIC_DOWN_BOX color 74 labelfont 1 labelcolor 83 textfont 1 textsize 19 textcolor 32
+  }
+  Fl_Button next_button {
+    image {icon_next.png} xywh {90 445 25 25} box GTK_UP_BOX color 91
+  }
+  Fl_Button previous_button {
+    image {icon_back.png} xywh {60 445 25 25} box GTK_UP_BOX color 91
+  }
+  Fl_Progress progress_bar {selected
+    xywh {60 480 210 10} box ROUNDED_BOX color 17 selection_color 59 labelfont 1 labelcolor 63
+  }
+  Fl_Choice method_choices {
+    label {Method : } open
+    xywh {110 130 180 25} box PLASTIC_DOWN_BOX down_box BORDER_BOX color 64 selection_color 0 labelfont 1 labelcolor 83 textfont 15
+  } {
+    MenuItem DFS {
+      label DFS
+      xywh {0 0 100 20} labelsize 12
+    }
+    MenuItem BFS {
+      label BFS
+      xywh {0 0 100 20} labelsize 12
     }
   }
 }

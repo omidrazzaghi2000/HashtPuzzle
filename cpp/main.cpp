@@ -162,7 +162,7 @@ UserInterface::UserInterface(int X, int Y, int W, int H, int argc , char **argv,
   insert->labelfont(4);
   insert->labelcolor((Fl_Color)53);
 // Fl_Button* insert
- Fl_Input *inputGoal = new Fl_Input(20, 10, 180, 30);
+ Fl_Input *inputGoal = new Fl_Input(20, 10, 180, 30,"Insert Goal state: ");
   
   insert->callback(setGoalBoard,(void*)inputGoal);
 
@@ -175,9 +175,10 @@ this->show(argc,argv);
 }
 
 void setGoalBoard(Fl_Widget* widget,void* data){
-  printf(((Fl_Input*)data)->value());
   std::vector<int> numbers =  getGoalBoard((char*)((Fl_Input*)data)->value());
   Board goal {Board(numbers)};
+  printf("\u001b[42mGoal");
+  printf("\u001b[0m : \n");
   goal.disp();
 }
 //Text input
