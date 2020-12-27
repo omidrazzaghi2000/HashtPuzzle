@@ -11,6 +11,7 @@
 #include <FL/Fl_Value_Output.H>
 #include <FL/Fl_Progress.H>
 #include <FL/Fl_Choice.H>
+#include "board.h"
 /**
  Show table to user
 */
@@ -29,5 +30,6 @@ public:
   static Fl_Menu_Item menu_method_choices[];
   static Fl_Menu_Item *DFS;
   static Fl_Menu_Item *BFS;
+  Board board {Board()};
 };
 #endif

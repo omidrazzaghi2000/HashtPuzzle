@@ -127,8 +127,8 @@ int main(int argc , char **argv){
     
     // MainMenuWindow(argc ,argv);
     MainWindow * main_window =(new MainWindow(632,118,315,520,"8 Puzzle Solver"));
-    
-    main_window->show();
+    main_window->end();
+    main_window->show(argc,argv);
     return Fl::run();
 
 }
@@ -209,33 +209,10 @@ int main(int argc , char **argv){
 
 // //TableOfTile
 
-// auto num2char(int number){
-//   switch (number)
-//   {
-//   case 1:
-//     return "1";
-//   case 2:
-//     return "2";  
-//   case 3:
-//     return "3";
-//   case 4:
-//     return "4";
-//   case 5:
-//     return "5";
-//   case 6:
-//     return "6";
-//   case 7:
-//     return "7";
-//   case 8:
-//     return "8";
-//   default:
-//     return "0";
-    
-//   }
-// } 
+
 
 // TableOfTiles::TableOfTiles(Board board,int X,int Y,int W,int H,const char*L):Fl_Tile(X,Y,W,H,L){
-//    Fl_Tile* TableTile = new Fl_Tile(25, 95, 240, 240, "Table");
+//    Fl_Tile* TableTile = new Fl_Tile(60, 230, 210, 210, "Table");
 //   TableTile->box(FL_THIN_DOWN_BOX);
 //   int width{70};
 //   int height{70};

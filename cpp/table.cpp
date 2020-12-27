@@ -3,6 +3,11 @@
 #include "table.h"
 
 #include <FL/Fl_Image.H>
+
+//------------Prototypes-------------------
+const char * num2char(int number);
+//-----------------------------------------
+
 static const unsigned char idata_icon_next[] =
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,127,127,127,8,113,113,113,
 9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -105,68 +110,92 @@ this->labelcolor(FL_BACKGROUND2_COLOR);
   o->color((Fl_Color)123);
   o->labelfont(1);
   o->labelcolor(FL_YELLOW);
-  { Fl_Box* o = new Fl_Box(60, 230, 70, 70, "1");
-    o->box(FL_GTK_UP_BOX);
-    o->color((Fl_Color)73);
-    o->selection_color((Fl_Color)48);
-    o->labelfont(1);
-    o->labelsize(32);
-    o->labelcolor(FL_YELLOW);
-  } // Fl_Box* o
-  { Fl_Box* o = new Fl_Box(130, 230, 70, 70, "2");
-    o->box(FL_GTK_UP_BOX);
-    o->color((Fl_Color)73);
-    o->labelfont(1);
-    o->labelsize(32);
-    o->labelcolor(FL_YELLOW);
-  } // Fl_Box* o
-  { Fl_Box* o = new Fl_Box(200, 230, 70, 70, "2");
-    o->box(FL_GTK_UP_BOX);
-    o->color((Fl_Color)73);
-    o->labelfont(1);
-    o->labelsize(32);
-    o->labelcolor(FL_YELLOW);
-  } // Fl_Box* o
-  { Fl_Box* o = new Fl_Box(60, 300, 70, 70, "1");
-    o->box(FL_GTK_UP_BOX);
-    o->color((Fl_Color)73);
-    o->selection_color((Fl_Color)48);
-    o->labelfont(1);
-    o->labelsize(32);
-    o->labelcolor(FL_YELLOW);
-  } // Fl_Box* o
-  { Fl_Box* o = new Fl_Box(130, 300, 70, 70, "1");
-    o->box(FL_GTK_UP_BOX);
-    o->color((Fl_Color)73);
-    o->selection_color((Fl_Color)48);
-    o->labelfont(1);
-    o->labelsize(32);
-    o->labelcolor(FL_YELLOW);
-  } // Fl_Box* o
-  { Fl_Box* o = new Fl_Box(200, 300, 70, 70, "1");
-    o->box(FL_GTK_UP_BOX);
-    o->color((Fl_Color)73);
-    o->selection_color((Fl_Color)48);
-    o->labelfont(1);
-    o->labelsize(32);
-    o->labelcolor(FL_YELLOW);
-  } // Fl_Box* o
-  { Fl_Box* o = new Fl_Box(60, 370, 70, 70, "1");
-    o->box(FL_GTK_UP_BOX);
-    o->color((Fl_Color)73);
-    o->selection_color((Fl_Color)48);
-    o->labelfont(1);
-    o->labelsize(32);
-    o->labelcolor(FL_YELLOW);
-  } // Fl_Box* o
-  { Fl_Box* o = new Fl_Box(130, 370, 70, 70, "1");
-    o->box(FL_GTK_UP_BOX);
-    o->color((Fl_Color)73);
-    o->selection_color((Fl_Color)48);
-    o->labelfont(1);
-    o->labelsize(32);
-    o->labelcolor(FL_YELLOW);
-  } // Fl_Box* o
+  int width{70};
+  int height{70};
+  int x{30};
+  int y{160};
+  //------------make table--------------//
+    for(size_t i {0} ; i < board.getTable().size() ; i++){
+    y = y+70;
+    x = 60;
+    for (size_t j{0} ; j < board.getTable().size() ; j++){
+      int number = board.getTable().at(i).at(j);
+      if(number!=0){
+      Fl_Box* Tile1 = new Fl_Box(x,y,width,height,num2char(number));
+        Tile1->box(FL_GTK_UP_BOX);
+        Tile1->color((Fl_Color)73);
+        Tile1->selection_color((Fl_Color)48);
+        Tile1->labelfont(1);
+        Tile1->labelsize(32);
+        Tile1->labelcolor(FL_YELLOW);
+      }
+      x=x+70;
+    }
+  }
+  // -------------------------------------------------------
+
+  // { Fl_Box* o = new Fl_Box(60, 230, 70, 70, "10");
+  //   o->box(FL_GTK_UP_BOX);
+  //   o->color((Fl_Color)73);
+  //   o->selection_color((Fl_Color)48);
+  //   o->labelfont(1);
+  //   o->labelsize(32);
+  //   o->labelcolor(FL_YELLOW);
+  // } // Fl_Box* o
+  // { Fl_Box* o = new Fl_Box(130, 230, 70, 70, "2");
+  //   o->box(FL_GTK_UP_BOX);
+  //   o->color((Fl_Color)73);
+  //   o->labelfont(1);
+  //   o->labelsize(32);
+  //   o->labelcolor(FL_YELLOW);
+  // } // Fl_Box* o
+  // { Fl_Box* o = new Fl_Box(200, 230, 70, 70, "2");
+  //   o->box(FL_GTK_UP_BOX);
+  //   o->color((Fl_Color)73);
+  //   o->labelfont(1);
+  //   o->labelsize(32);
+  //   o->labelcolor(FL_YELLOW);
+  // } // Fl_Box* o
+  // { Fl_Box* o = new Fl_Box(60, 300, 70, 70, "1");
+  //   o->box(FL_GTK_UP_BOX);
+  //   o->color((Fl_Color)73);
+  //   o->selection_color((Fl_Color)48);
+  //   o->labelfont(1);
+  //   o->labelsize(32);
+  //   o->labelcolor(FL_YELLOW);
+  // } // Fl_Box* o
+  // { Fl_Box* o = new Fl_Box(130, 300, 70, 70, "1");
+  //   o->box(FL_GTK_UP_BOX);
+  //   o->color((Fl_Color)73);
+  //   o->selection_color((Fl_Color)48);
+  //   o->labelfont(1);
+  //   o->labelsize(32);
+  //   o->labelcolor(FL_YELLOW);
+  // } // Fl_Box* o
+  // { Fl_Box* o = new Fl_Box(200, 300, 70, 70, "1");
+  //   o->box(FL_GTK_UP_BOX);
+  //   o->color((Fl_Color)73);
+  //   o->selection_color((Fl_Color)48);
+  //   o->labelfont(1);
+  //   o->labelsize(32);
+  //   o->labelcolor(FL_YELLOW);
+  // } // Fl_Box* o
+  // { Fl_Box* o = new Fl_Box(60, 370, 70, 70, "1");
+  //   o->box(FL_GTK_UP_BOX);
+  //   o->color((Fl_Color)73);
+  //   o->selection_color((Fl_Color)48);
+  //   o->labelfont(1);
+  //   o->labelsize(32);
+  //   o->labelcolor(FL_YELLOW);
+  // } // Fl_Box* o
+  // { Fl_Box* o = new Fl_Box(130, 370, 70, 70, "1");
+  //   o->box(FL_GTK_UP_BOX);
+  //   o->color((Fl_Color)73);
+  //   o->selection_color((Fl_Color)48);
+  //   o->labelfont(1);
+  //   o->labelsize(32);
+  //   o->labelcolor(FL_YELLOW);
+  // } // Fl_Box* o
   o->end();
 } // Fl_Tile* o
 { user_input_table = new Fl_Input(110, 50, 180, 30, "Insert Start : ");
@@ -214,7 +243,7 @@ end();
 }
 
 
-auto num2char(int number){
+const char * num2char(int number){
   switch (number)
   {
   case 1:
