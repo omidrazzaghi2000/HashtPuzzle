@@ -3,12 +3,12 @@ version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class UserInterface {
-  comment {User interface for table} open
+  comment {User interface for table} open selected
   xywh {485 79 315 520} type Double box ENGRAVED_BOX color 64 labelfont 1 labelcolor 7 visible
 } {
   Fl_Button solve {
     label solve
-    xywh {131 175 70 25} box GTK_UP_BOX shortcut 0x73 color 73 labelfont 1 labelcolor 83
+    xywh {220 175 70 25} box GTK_UP_BOX shortcut 0x73 color 73 labelfont 1 labelcolor 95
   }
   Fl_Input goal_input {
     label {Insert Goal : }
@@ -65,7 +65,7 @@ widget_class UserInterface {
   Fl_Button previous_button {
     image {icon_back.png} xywh {60 445 25 25} box GTK_UP_BOX color 91
   }
-  Fl_Progress progress_bar {selected
+  Fl_Progress progress_bar {
     xywh {60 480 210 10} box ROUNDED_BOX color 17 selection_color 59 labelfont 1 labelcolor 63
   }
   Fl_Choice method_choices {
@@ -80,5 +80,9 @@ widget_class UserInterface {
       label BFS
       xywh {0 0 100 20} labelsize 12
     }
+  }
+  Fl_Input number_of_level_input {
+    label {Number of level : }
+    xywh {140 170 65 30} box GTK_DOWN_BOX labelfont 1 labelcolor 95 textsize 12
   }
 }

@@ -12,6 +12,7 @@
 #include <FL/Fl_Progress.H>
 #include <FL/Fl_Choice.H>
 #include "board.h"
+#include "traverse.h"
 /**
  Show table to user
 */
@@ -30,6 +31,10 @@ public:
   static Fl_Menu_Item menu_method_choices[];
   static Fl_Menu_Item *DFS;
   static Fl_Menu_Item *BFS;
+  Fl_Tile* main_tile;
+  std::vector<Fl_Box*> tiles;
+  Fl_Input *number_of_level_input;
   Board board {Board()};
+
 };
 #endif

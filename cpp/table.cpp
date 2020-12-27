@@ -6,6 +6,10 @@
 
 //------------Prototypes-------------------
 const char * num2char(int number);
+void makeTable(Fl_Tile * main_tile,Board board, std::vector<Fl_Box*> & tiles);
+void removeTable(std::vector<Fl_Box*> &tiles);
+//call_backs:
+  static void solveCallback(Fl_Widget * Fl_Widget,void* data);
 //-----------------------------------------
 
 static const unsigned char idata_icon_next[] =
@@ -93,111 +97,28 @@ this->box(FL_ENGRAVED_BOX);
 this->color((Fl_Color)64);
 this->labelfont(1);
 this->labelcolor(FL_BACKGROUND2_COLOR);
-{ solve = new Fl_Button(131, 175, 70, 25, "solve");
+{ solve = new Fl_Button(220, 175, 70, 25, "solve");
   solve->box(FL_GTK_UP_BOX);
   solve->shortcut(0x73);
   solve->color((Fl_Color)73);
   solve->labelfont(1);
   solve->labelcolor(FL_YELLOW);
-  solve->callback(solveCallback);
+  solve->callback(solveCallback,this);
 } // Fl_Button* solve
 { goal_input = new Fl_Input(110, 90, 180, 30, "Insert Goal : ");
   goal_input->labelfont(1);
   goal_input->labelcolor(FL_YELLOW);
   goal_input->textsize(12);
 } // Fl_Input* goal_input
-{ Fl_Tile* o = new Fl_Tile(60, 230, 210, 210, "Table");
-  o->box(FL_THIN_UP_BOX);
-  o->color((Fl_Color)123);
-  o->labelfont(1);
-  o->labelcolor(FL_YELLOW);
-  int width{70};
-  int height{70};
-  int x{30};
-  int y{160};
-  //------------make table--------------//
-    for(size_t i {0} ; i < board.getTable().size() ; i++){
-    y = y+70;
-    x = 60;
-    for (size_t j{0} ; j < board.getTable().size() ; j++){
-      int number = board.getTable().at(i).at(j);
-      if(number!=0){
-      Fl_Box* Tile = new Fl_Box(x,y,width,height,num2char(number));
-        Tile->box(FL_GTK_UP_BOX);
-        Tile->color((Fl_Color)73);
-        Tile->selection_color((Fl_Color)48);
-        Tile->labelfont(1);
-        Tile->labelsize(32);
-        Tile->labelcolor(FL_YELLOW);
-      }
-      x=x+70;
-    }
-  }
-  // -------------------------------------------------------
+{ main_tile = new Fl_Tile(60, 230, 210, 210, "Table");
+  main_tile->box(FL_THIN_UP_BOX);
+  main_tile->color((Fl_Color)123);
+  main_tile->labelfont(1);
+  main_tile->labelcolor(FL_YELLOW);
+  makeTable(main_tile,board,tiles);
 
-  // { Fl_Box* o = new Fl_Box(60, 230, 70, 70, "10");
-  //   o->box(FL_GTK_UP_BOX);
-  //   o->color((Fl_Color)73);
-  //   o->selection_color((Fl_Color)48);
-  //   o->labelfont(1);
-  //   o->labelsize(32);
-  //   o->labelcolor(FL_YELLOW);
-  // } // Fl_Box* o
-  // { Fl_Box* o = new Fl_Box(130, 230, 70, 70, "2");
-  //   o->box(FL_GTK_UP_BOX);
-  //   o->color((Fl_Color)73);
-  //   o->labelfont(1);
-  //   o->labelsize(32);
-  //   o->labelcolor(FL_YELLOW);
-  // } // Fl_Box* o
-  // { Fl_Box* o = new Fl_Box(200, 230, 70, 70, "2");
-  //   o->box(FL_GTK_UP_BOX);
-  //   o->color((Fl_Color)73);
-  //   o->labelfont(1);
-  //   o->labelsize(32);
-  //   o->labelcolor(FL_YELLOW);
-  // } // Fl_Box* o
-  // { Fl_Box* o = new Fl_Box(60, 300, 70, 70, "1");
-  //   o->box(FL_GTK_UP_BOX);
-  //   o->color((Fl_Color)73);
-  //   o->selection_color((Fl_Color)48);
-  //   o->labelfont(1);
-  //   o->labelsize(32);
-  //   o->labelcolor(FL_YELLOW);
-  // } // Fl_Box* o
-  // { Fl_Box* o = new Fl_Box(130, 300, 70, 70, "1");
-  //   o->box(FL_GTK_UP_BOX);
-  //   o->color((Fl_Color)73);
-  //   o->selection_color((Fl_Color)48);
-  //   o->labelfont(1);
-  //   o->labelsize(32);
-  //   o->labelcolor(FL_YELLOW);
-  // } // Fl_Box* o
-  // { Fl_Box* o = new Fl_Box(200, 300, 70, 70, "1");
-  //   o->box(FL_GTK_UP_BOX);
-  //   o->color((Fl_Color)73);
-  //   o->selection_color((Fl_Color)48);
-  //   o->labelfont(1);
-  //   o->labelsize(32);
-  //   o->labelcolor(FL_YELLOW);
-  // } // Fl_Box* o
-  // { Fl_Box* o = new Fl_Box(60, 370, 70, 70, "1");
-  //   o->box(FL_GTK_UP_BOX);
-  //   o->color((Fl_Color)73);
-  //   o->selection_color((Fl_Color)48);
-  //   o->labelfont(1);
-  //   o->labelsize(32);
-  //   o->labelcolor(FL_YELLOW);
-  // } // Fl_Box* o
-  // { Fl_Box* o = new Fl_Box(130, 370, 70, 70, "1");
-  //   o->box(FL_GTK_UP_BOX);
-  //   o->color((Fl_Color)73);
-  //   o->selection_color((Fl_Color)48);
-  //   o->labelfont(1);
-  //   o->labelsize(32);
-  //   o->labelcolor(FL_YELLOW);
-  // } // Fl_Box* o
-  o->end();
+ 
+  main_tile->end();
 } // Fl_Tile* o
 { user_input_table = new Fl_Input(110, 50, 180, 30, "Insert Start : ");
   user_input_table->labelfont(1);
@@ -240,6 +161,12 @@ this->labelcolor(FL_BACKGROUND2_COLOR);
   method_choices->textfont(15);
   method_choices->menu(menu_method_choices);
 } // Fl_Choice* method_choices
+{ number_of_level_input = new Fl_Input(140, 170, 65, 30, "Number of level : ");
+  number_of_level_input->box(FL_GTK_DOWN_BOX);
+  number_of_level_input->labelfont(1);
+  number_of_level_input->labelcolor(FL_YELLOW);
+  number_of_level_input->textsize(12);
+} // Fl_Input* number_of_level_input
 end();
 }
 
@@ -290,25 +217,74 @@ std::vector<int> getBoard(char a[20]){
     return Numbers;
 }
 
+
+void makeTable(Fl_Tile * main_tile,Board board , std::vector<Fl_Box*> & tiles){
+  int width{70};
+  int height{70};
+  int x{30};
+  int y{160};
+  tiles.erase(tiles.begin(),tiles.end());
+    for(size_t i {0} ; i < board.getTable().size() ; i++){
+    y = y+70;
+    x = 60;
+    for (size_t j{0} ; j < board.getTable().size() ; j++){
+      int number = board.getTable().at(i).at(j);
+      Fl_Box* Tile = new Fl_Box(x,y,width,height,num2char(number));
+        Tile->box(FL_GTK_UP_BOX);
+        Tile->color((Fl_Color)73);
+        Tile->selection_color((Fl_Color)48);
+        Tile->labelfont(1);
+        Tile->labelsize(32);
+        Tile->labelcolor(FL_YELLOW);
+      if(number==0){
+        Tile->clear_visible();
+      }
+      main_tile->add(Tile);
+      tiles.push_back(Tile);
+      x=x+70;
+    }
+  }
+}
+
+void removeTable(std::vector<Fl_Box*> &tiles){
+  for(size_t i {0} ; i < tiles.size() ; i++){
+    tiles.at(i)->~Fl_Box();
+    
+  }
+}
 //----------------------------------------------
 
 //-----------------CallBacks--------------------
 static void solveCallback(Fl_Widget * Fl_Widget,void* data){
-  if(((MainWindow*)data)->goal_input->value() == ""){
+  //start and goal board
+  Board start;
+  Board goal;
+  if(((MainWindow*)data)->goal_input->size()!=0){
       std::vector<int> numbers =  getBoard((char*)((MainWindow*)data)->goal_input->value());
-      Board goal {Board(numbers)};
+      goal=Board(numbers);
       printf("\u001b[44mGoal saved");
       printf("\u001b[0m : \n");
   }else{
       std::vector<int> numbers = {1,2,3,4,5,6,7,8,0};
-      Board goal {Board(numbers)};
+      goal=Board(numbers);
       printf("\u001b[44mGoal is default");
       printf("\u001b[0m : \n");
   }
-  if(((MainWindow*)data)->user_input_table->value() == ""){
-      Board start = ((MainWindow*)data)->board;
+  if(((MainWindow*)data)->user_input_table->size()==0){
+      start = ((MainWindow*)data)->board;
   }else{
-      Board start = getBoard((char*)((char*)((MainWindow*)data)->user_input_table->value());
+      start = getBoard((char*)((char*)((MainWindow*)data)->user_input_table->value()));
+      
+      ((MainWindow*)data)->main_tile->clear();
+      
+      makeTable(((MainWindow*)data)->main_tile,start,((MainWindow*)data)->tiles);
+      
+      ((MainWindow*)data)->redraw();
+      
   }
-  
+
+  //set methods and level
+  // printf("%d ",((MainWindow*)data)->menu_method_choices->value());
+
 }
+

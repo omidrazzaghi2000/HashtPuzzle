@@ -255,90 +255,90 @@ int Huristic_score(Board currentState , Board goal){
     }
     return h_score;
 }
-std::vector<Node> updateA_StarFeatures(std::vector<Node> tempRow , Board goal , int levelCounter){
-    for(size_t i {0} ; i < tempRow.size() ; i++){
-        tempRow.at(i).a_star_feature.h_score = Huristic_score(tempRow.at(i).table,goal);
-        tempRow.at(i).a_star_feature.g_score = levelCounter+1;
-        tempRow.at(i).a_star_feature.f_score = tempRow.at(i).a_star_feature.h_score+
-                                    tempRow.at(i).a_star_feature.g_score;
-        // i.table.disp();
-        // printf("h : %d , g: %d , f : %d \n",i.a_star_feature.h_score,i.a_star_feature.g_score,i.a_star_feature.f_score);
-    }
-    auto lessFunction = [](Node a,Node b){return a.a_star_feature.f_score > b.a_star_feature.f_score;};
-    // printf("test : %d\n" , tempRow.at(0).a_star_feature.f_score);
-    std::priority_queue<Node,std::vector<Node>,decltype(lessFunction)> sortedNodes(tempRow.begin(),tempRow.end());
-    // printf("min_f : %d\n" , sortedNodes.top().a_star_feature.f_score);
-    std::vector<Node> returnVector;
-    for(size_t i {0} ; i < sortedNodes.size() ; i++){
-        returnVector.push_back(sortedNodes.top());
-    }
-    return returnVector;
-}
-void A_StarTraverse(Board start , Board goal , int numberOfLevel){
-    static bool isFinished=false;
+// std::vector<Node> updateA_StarFeatures(std::vector<Node> tempRow , Board goal , int levelCounter){
+//     for(size_t i {0} ; i < tempRow.size() ; i++){
+//         tempRow.at(i).a_star_feature.h_score = Huristic_score(tempRow.at(i).table,goal);
+//         tempRow.at(i).a_star_feature.g_score = levelCounter+1;
+//         tempRow.at(i).a_star_feature.f_score = tempRow.at(i).a_star_feature.h_score+
+//                                     tempRow.at(i).a_star_feature.g_score;
+//         // i.table.disp();
+//         // printf("h : %d , g: %d , f : %d \n",i.a_star_feature.h_score,i.a_star_feature.g_score,i.a_star_feature.f_score);
+//     }
+//     auto lessFunction = [](Node a,Node b){return a.a_star_feature.f_score > b.a_star_feature.f_score;};
+//     // printf("test : %d\n" , tempRow.at(0).a_star_feature.f_score);
+//     std::priority_queue<Node,std::vector<Node>,decltype(lessFunction)> sortedNodes(tempRow.begin(),tempRow.end());
+//     // printf("min_f : %d\n" , sortedNodes.top().a_star_feature.f_score);
+//     std::vector<Node> returnVector;
+//     for(size_t i {0} ; i < sortedNodes.size() ; i++){
+//         returnVector.push_back(sortedNodes.top());
+//     }
+//     return returnVector;
+// }
+// void A_StarTraverse(Board start , Board goal , int numberOfLevel){
+//     static bool isFinished=false;
     
-    Node root {Node(start,Direction::NOTHING)};
-    root.a_star_feature.h_score=Huristic_score(start,goal);
-    root.a_star_feature.g_score=0;
-    root.a_star_feature.f_score=root.a_star_feature.g_score+
-                                root.a_star_feature.h_score;
-    root.fatherPointer = nullptr;
-    // root.disp();
-    // printf("\u001b[45m\n");
-    // printf("\u001b[0m\n");
-    if(root.table.getTable() == goal.getTable()){
-        isFinished = true;
-    }
-    std::vector<Node> row;
-    row.push_back(root);
-    Node finalNode;
-    for(int levelCounter {0} ; levelCounter < numberOfLevel && !isFinished; levelCounter++){
-        std::vector<Node> tempRow ;
+//     Node root {Node(start,Direction::NOTHING)};
+//     root.a_star_feature.h_score=Huristic_score(start,goal);
+//     root.a_star_feature.g_score=0;
+//     root.a_star_feature.f_score=root.a_star_feature.g_score+
+//                                 root.a_star_feature.h_score;
+//     root.fatherPointer = nullptr;
+//     // root.disp();
+//     // printf("\u001b[45m\n");
+//     // printf("\u001b[0m\n");
+//     if(root.table.getTable() == goal.getTable()){
+//         isFinished = true;
+//     }
+//     std::vector<Node> row;
+//     row.push_back(root);
+//     Node finalNode;
+//     for(int levelCounter {0} ; levelCounter < numberOfLevel && !isFinished; levelCounter++){
+//         std::vector<Node> tempRow ;
 
-        for(size_t i{0} ; i < row.size() ; i++){
-            auto v = getRow(row.at(i));
+//         for(size_t i{0} ; i < row.size() ; i++){
+//             auto v = getRow(row.at(i));
 
-            // for(size_t i {0} ; i < v.size() ; i++){
-            //     v.at(i).table.disp();
-            // }
+//             // for(size_t i {0} ; i < v.size() ; i++){
+//             //     v.at(i).table.disp();
+//             // }
 
-            if(checkRow(v,goal)!= -1){
-                isFinished = true;
+//             if(checkRow(v,goal)!= -1){
+//                 isFinished = true;
                 
-                finalNode = v.at(checkRow(v,goal));
+//                 finalNode = v.at(checkRow(v,goal));
                 
-                break;
-            }
-            tempRow.insert(tempRow.cend(),v.begin() , v.end());
+//                 break;
+//             }
+//             tempRow.insert(tempRow.cend(),v.begin() , v.end());
             
-        }
-        //A* features updating:
-        if(!isFinished){
-            row.erase(row.begin(),row.end());
+//         }
+//         //A* features updating:
+//         if(!isFinished){
+//             row.erase(row.begin(),row.end());
         
-            row = (updateA_StarFeatures(tempRow,goal,levelCounter));
-            // for(auto i : row){
-            //     A_StarTraverse(i.table,goal,numberOfLevel-levelCounter);
-            // }
+//             row = (updateA_StarFeatures(tempRow,goal,levelCounter));
+//             // for(auto i : row){
+//             //     A_StarTraverse(i.table,goal,numberOfLevel-levelCounter);
+//             // }
             
-        }
-        // row.at(0).table.disp();
-    }
-    if(isFinished){
+//         }
+//         // row.at(0).table.disp();
+//     }
+//     if(isFinished){
     
-    std::vector<Board> solution{traceSolution(finalNode)};
-    start.disp();
-    for(int i{(int)solution.size()-1} ; i >= 0 ; i --){
-        std::cout << solution.size() - i << std::endl;
-        solution.at(i).disp();
-    }
-    }
-    else{
-        printf("\u001b[49mI could not found it with this level");
-        printf("\u001b[0m\n");
-    }
-}
+//     std::vector<Board> solution{traceSolution(finalNode)};
+//     start.disp();
+//     for(int i{(int)solution.size()-1} ; i >= 0 ; i --){
+//         std::cout << solution.size() - i << std::endl;
+//         solution.at(i).disp();
+//     }
+//     }
+//     else{
+//         printf("\u001b[49mI could not found it with this level");
+//         printf("\u001b[0m\n");
+//     }
+// }
 
 
 
-//Bi directional search
+// //Bi directional search

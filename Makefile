@@ -16,6 +16,6 @@ $(TARGET): $(OBJECTS)
 ./obj/table.o: ./cpp/table.cpp
 	$(CXX) $(CXXFLAGS) ./cpp/table.cpp -o ./obj/table.o
 main: ./cpp/main.cpp  ./cpp/traverse.cpp 
-	$(CXX) -I h/ -I /usr/local/include/gtest/ -I /usr/local/include -I /usr/include/freetype2 -I /usr/include/libpng16 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_THREAD_SAFE -D_REENTRANT -o 'main' './cpp/board.cpp' './cpp/table.cpp' './cpp/main.cpp' /usr/local/lib/libfltk.a -lXrender -lXext -lfontconfig -lpthread -ldl -lm -lX11  
+	$(CXX) -I h/ -I /usr/local/include/gtest/ -I /usr/local/include -I /usr/include/freetype2 -I /usr/include/libpng16 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_THREAD_SAFE -D_REENTRANT -o  'main' './cpp/traverse.cpp' './cpp/board.cpp' './cpp/table.cpp' './cpp/main.cpp' /usr/local/lib/libfltk.a -lXrender -lXext -lfontconfig -lpthread -ldl -lm -lX11 -Ofast
 clean:
 	rm -fv $(TARGET) $(OBJECTS)
