@@ -7,7 +7,7 @@
 //------------Prototypes-------------------
 const char * num2char(int number);
 void makeTable(Fl_Tile * main_tile,Board board, std::vector<Fl_Box*> & tiles);
-void removeTable(std::vector<Fl_Box*> &tiles);
+int getLevelNumber(char* num_char);
 //call_backs:
   static void solveCallback(Fl_Widget * Fl_Widget,void* data);
 //-----------------------------------------
@@ -85,8 +85,8 @@ static Fl_Image *image_icon_back() {
 }
 
 Fl_Menu_Item MainWindow::menu_method_choices[] = {
- {"DFS", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 12, 0},
- {"BFS", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 12, 0},
+ {"Depth First Search", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 12, 0},
+ {"Breadth First Search", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 Fl_Menu_Item* MainWindow::DFS = MainWindow::menu_method_choices + 0;
@@ -246,12 +246,11 @@ void makeTable(Fl_Tile * main_tile,Board board , std::vector<Fl_Box*> & tiles){
   }
 }
 
-void removeTable(std::vector<Fl_Box*> &tiles){
-  for(size_t i {0} ; i < tiles.size() ; i++){
-    tiles.at(i)->~Fl_Box();
-    
-  }
+int getLevelNumber(char* num_char){
+  std::string num_string(num_char);
+  return std::stoi(num_string);
 }
+
 //----------------------------------------------
 
 //-----------------CallBacks--------------------
@@ -268,7 +267,7 @@ static void solveCallback(Fl_Widget * Fl_Widget,void* data){
       std::vector<int> numbers = {1,2,3,4,5,6,7,8,0};
       goal=Board(numbers);
       printf("\u001b[44mGoal is default");
-      printf("\u001b[0m : \n");
+      printf("\u001b[0m\n");
   }
   if(((MainWindow*)data)->user_input_table->size()==0){
       start = ((MainWindow*)data)->board;
@@ -283,8 +282,32 @@ static void solveCallback(Fl_Widget * Fl_Widget,void* data){
       
   }
 
-  //set methods and level
-  // printf("%d ",((MainWindow*)data)->menu_method_choices->value());
+  //set methods and get levels
+  if(((MainWindow*)data)->number_of_level_input->size()!=0){
+    int level_number {getLevelNumber((char*)((MainWindow*)data)->number_of_level_input->value())};
+    switch (((MainWindow*)data)->method_choices->value())
+    {
+    case 0:
+      /*DFS*/
+      
+      
+      break;
+    case 1:
+      /*BFS*/
+
+      break;
+    default:
+      break;
+    }
+  }else{
+    
+    ((MainWindow*)data)->number_of_level_input->take_focus();
+    
+
+    printf("\u001b[41mPlease enter level number ");
+    printf("\u001b[0m\n");
+  }
+  
 
 }
 

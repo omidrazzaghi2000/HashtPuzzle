@@ -11,11 +11,17 @@
 #include <FL/Fl_Value_Output.H>
 #include <FL/Fl_Progress.H>
 #include <FL/Fl_Choice.H>
+#include <FL/Fl_Widget.H>
+#include <string>
 #include "board.h"
 #include "traverse.h"
 /**
  Show table to user
 */
+enum Method{
+  BFS,
+  DFS
+};
 
 class MainWindow : public Fl_Window {
 public:
@@ -35,6 +41,7 @@ public:
   std::vector<Fl_Box*> tiles;
   Fl_Input *number_of_level_input;
   Board board {Board()};
-
+  Method solve_method {Method::BFS};
+  
 };
 #endif
