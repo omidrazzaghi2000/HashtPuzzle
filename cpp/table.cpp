@@ -75,15 +75,15 @@ static Fl_Image *image_icon_back() {
   return image;
 }
 
-Fl_Menu_Item UserInterface::menu_method_choices[] = {
+Fl_Menu_Item MainWindow::menu_method_choices[] = {
  {"DFS", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 12, 0},
  {"BFS", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
-Fl_Menu_Item* UserInterface::DFS = UserInterface::menu_method_choices + 0;
-Fl_Menu_Item* UserInterface::BFS = UserInterface::menu_method_choices + 1;
-UserInterface::UserInterface(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(X, Y, W, H, L) {
+Fl_Menu_Item* MainWindow::DFS = MainWindow::menu_method_choices + 0;
+Fl_Menu_Item* MainWindow::BFS = MainWindow::menu_method_choices + 1;
+MainWindow::MainWindow(int X, int Y, int W, int H, const char *L)
+  : Fl_Window(X, Y, W, H, L) {
 this->box(FL_ENGRAVED_BOX);
 this->color((Fl_Color)64);
 this->labelfont(1);
@@ -93,39 +93,39 @@ this->labelcolor(FL_BACKGROUND2_COLOR);
   solve->shortcut(0x73);
   solve->color((Fl_Color)73);
   solve->labelfont(1);
-  solve->labelcolor((Fl_Color)83);
+  solve->labelcolor(FL_YELLOW);
 } // Fl_Button* solve
 { goal_input = new Fl_Input(110, 90, 180, 30, "Insert Goal : ");
   goal_input->labelfont(1);
-  goal_input->labelcolor((Fl_Color)83);
+  goal_input->labelcolor(FL_YELLOW);
   goal_input->textsize(12);
 } // Fl_Input* goal_input
 { Fl_Tile* o = new Fl_Tile(60, 230, 210, 210, "Table");
   o->box(FL_THIN_UP_BOX);
   o->color((Fl_Color)123);
   o->labelfont(1);
-  o->labelcolor((Fl_Color)83);
+  o->labelcolor(FL_YELLOW);
   { Fl_Box* o = new Fl_Box(60, 230, 70, 70, "1");
     o->box(FL_GTK_UP_BOX);
     o->color((Fl_Color)73);
     o->selection_color((Fl_Color)48);
     o->labelfont(1);
     o->labelsize(32);
-    o->labelcolor((Fl_Color)83);
+    o->labelcolor(FL_YELLOW);
   } // Fl_Box* o
   { Fl_Box* o = new Fl_Box(130, 230, 70, 70, "2");
     o->box(FL_GTK_UP_BOX);
     o->color((Fl_Color)73);
     o->labelfont(1);
     o->labelsize(32);
-    o->labelcolor((Fl_Color)83);
+    o->labelcolor(FL_YELLOW);
   } // Fl_Box* o
   { Fl_Box* o = new Fl_Box(200, 230, 70, 70, "2");
     o->box(FL_GTK_UP_BOX);
     o->color((Fl_Color)73);
     o->labelfont(1);
     o->labelsize(32);
-    o->labelcolor((Fl_Color)83);
+    o->labelcolor(FL_YELLOW);
   } // Fl_Box* o
   { Fl_Box* o = new Fl_Box(60, 300, 70, 70, "1");
     o->box(FL_GTK_UP_BOX);
@@ -133,7 +133,7 @@ this->labelcolor(FL_BACKGROUND2_COLOR);
     o->selection_color((Fl_Color)48);
     o->labelfont(1);
     o->labelsize(32);
-    o->labelcolor((Fl_Color)83);
+    o->labelcolor(FL_YELLOW);
   } // Fl_Box* o
   { Fl_Box* o = new Fl_Box(130, 300, 70, 70, "1");
     o->box(FL_GTK_UP_BOX);
@@ -141,7 +141,7 @@ this->labelcolor(FL_BACKGROUND2_COLOR);
     o->selection_color((Fl_Color)48);
     o->labelfont(1);
     o->labelsize(32);
-    o->labelcolor((Fl_Color)83);
+    o->labelcolor(FL_YELLOW);
   } // Fl_Box* o
   { Fl_Box* o = new Fl_Box(200, 300, 70, 70, "1");
     o->box(FL_GTK_UP_BOX);
@@ -149,7 +149,7 @@ this->labelcolor(FL_BACKGROUND2_COLOR);
     o->selection_color((Fl_Color)48);
     o->labelfont(1);
     o->labelsize(32);
-    o->labelcolor((Fl_Color)83);
+    o->labelcolor(FL_YELLOW);
   } // Fl_Box* o
   { Fl_Box* o = new Fl_Box(60, 370, 70, 70, "1");
     o->box(FL_GTK_UP_BOX);
@@ -157,7 +157,7 @@ this->labelcolor(FL_BACKGROUND2_COLOR);
     o->selection_color((Fl_Color)48);
     o->labelfont(1);
     o->labelsize(32);
-    o->labelcolor((Fl_Color)83);
+    o->labelcolor(FL_YELLOW);
   } // Fl_Box* o
   { Fl_Box* o = new Fl_Box(130, 370, 70, 70, "1");
     o->box(FL_GTK_UP_BOX);
@@ -165,38 +165,38 @@ this->labelcolor(FL_BACKGROUND2_COLOR);
     o->selection_color((Fl_Color)48);
     o->labelfont(1);
     o->labelsize(32);
-    o->labelcolor((Fl_Color)83);
+    o->labelcolor(FL_YELLOW);
   } // Fl_Box* o
   o->end();
 } // Fl_Tile* o
 { user_input_table = new Fl_Input(110, 50, 180, 30, "Insert Start : ");
   user_input_table->labelfont(1);
-  user_input_table->labelcolor((Fl_Color)83);
+  user_input_table->labelcolor(FL_YELLOW);
   user_input_table->textsize(12);
 } // Fl_Input* user_input_table
 { level_output_box = new Fl_Value_Output(210, 445, 60, 25, "Level");
   level_output_box->box(FL_PLASTIC_DOWN_BOX);
   level_output_box->color((Fl_Color)74);
   level_output_box->labelfont(1);
-  level_output_box->labelcolor((Fl_Color)83);
+  level_output_box->labelcolor(FL_YELLOW);
   level_output_box->textfont(1);
   level_output_box->textsize(19);
   level_output_box->textcolor(FL_GRAY0);
 } // Fl_Value_Output* level_output_box
 { next_button = new Fl_Button(90, 445, 25, 25);
   next_button->box(FL_GTK_UP_BOX);
-  next_button->color((Fl_Color)91);
+  next_button->color((Fl_Color)82);
   next_button->image( image_icon_next() );
 } // Fl_Button* next_button
 { previous_button = new Fl_Button(60, 445, 25, 25);
   previous_button->box(FL_GTK_UP_BOX);
-  previous_button->color((Fl_Color)91);
+  previous_button->color((Fl_Color)82);
   previous_button->image( image_icon_back() );
 } // Fl_Button* previous_button
 { progress_bar = new Fl_Progress(60, 480, 210, 10);
   progress_bar->box(FL_ROUNDED_BOX);
   progress_bar->color((Fl_Color)17);
-  progress_bar->selection_color((Fl_Color)59);
+  progress_bar->selection_color(FL_DARK_GREEN);
   progress_bar->labelfont(1);
   progress_bar->labelcolor(FL_GREEN);
 } // Fl_Progress* progress_bar
@@ -206,9 +206,34 @@ this->labelcolor(FL_BACKGROUND2_COLOR);
   method_choices->color((Fl_Color)64);
   method_choices->selection_color(FL_FOREGROUND_COLOR);
   method_choices->labelfont(1);
-  method_choices->labelcolor((Fl_Color)83);
+  method_choices->labelcolor(FL_YELLOW);
   method_choices->textfont(15);
   method_choices->menu(menu_method_choices);
 } // Fl_Choice* method_choices
 end();
 }
+
+
+auto num2char(int number){
+  switch (number)
+  {
+  case 1:
+    return "1";
+  case 2:
+    return "2";  
+  case 3:
+    return "3";
+  case 4:
+    return "4";
+  case 5:
+    return "5";
+  case 6:
+    return "6";
+  case 7:
+    return "7";
+  case 8:
+    return "8";
+  default:
+    return "0";
+  }
+} 

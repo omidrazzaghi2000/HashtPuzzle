@@ -3,7 +3,7 @@
 #ifndef table_h
 #define table_h
 #include <FL/Fl.H>
-#include <FL/Fl_Group.H>
+#include <FL/Fl_Window.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Tile.H>
@@ -12,12 +12,12 @@
 #include <FL/Fl_Progress.H>
 #include <FL/Fl_Choice.H>
 /**
- User interface for table
+ Show table to user
 */
 
-class UserInterface : public Fl_Group {
+class MainWindow : public Fl_Window {
 public:
-  UserInterface(int X, int Y, int W, int H, const char *L = 0);
+  MainWindow(int X, int Y, int W, int H, const char *L = 0);
   Fl_Button *solve;
   Fl_Input *goal_input;
   Fl_Input *user_input_table;
