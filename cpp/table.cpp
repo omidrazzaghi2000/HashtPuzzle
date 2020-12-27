@@ -99,6 +99,7 @@ this->labelcolor(FL_BACKGROUND2_COLOR);
   solve->color((Fl_Color)73);
   solve->labelfont(1);
   solve->labelcolor(FL_YELLOW);
+  solve->callback(solveCallback);
 } // Fl_Button* solve
 { goal_input = new Fl_Input(110, 90, 180, 30, "Insert Goal : ");
   goal_input->labelfont(1);
@@ -121,13 +122,13 @@ this->labelcolor(FL_BACKGROUND2_COLOR);
     for (size_t j{0} ; j < board.getTable().size() ; j++){
       int number = board.getTable().at(i).at(j);
       if(number!=0){
-      Fl_Box* Tile1 = new Fl_Box(x,y,width,height,num2char(number));
-        Tile1->box(FL_GTK_UP_BOX);
-        Tile1->color((Fl_Color)73);
-        Tile1->selection_color((Fl_Color)48);
-        Tile1->labelfont(1);
-        Tile1->labelsize(32);
-        Tile1->labelcolor(FL_YELLOW);
+      Fl_Box* Tile = new Fl_Box(x,y,width,height,num2char(number));
+        Tile->box(FL_GTK_UP_BOX);
+        Tile->color((Fl_Color)73);
+        Tile->selection_color((Fl_Color)48);
+        Tile->labelfont(1);
+        Tile->labelsize(32);
+        Tile->labelcolor(FL_YELLOW);
       }
       x=x+70;
     }
@@ -266,3 +267,48 @@ const char * num2char(int number){
     return "0";
   }
 } 
+
+//--------------HelperFunctions-----------------
+std::vector<int> getBoard(char a[20]){
+
+    std::vector<int> Numbers;
+    for(int i=0;i<20; i++)
+    {
+        
+        if((int)(a[i])!=32/*space*/ && (int)(a[i])!=-38){
+            //check is correct or not is it duplicate or not or it has 0 or not check or valid number entered or did not 
+            Numbers.push_back((int)*(a+i*sizeof(char))-48);
+            
+        }
+        
+
+    }
+    for(size_t i = 0 ; i < Numbers.size() ; i++){
+      //I do not know but this for is important. 😮😮😮😮      
+      
+    }    
+    return Numbers;
+}
+
+//----------------------------------------------
+
+//-----------------CallBacks--------------------
+static void solveCallback(Fl_Widget * Fl_Widget,void* data){
+  if(((MainWindow*)data)->goal_input->value() == ""){
+      std::vector<int> numbers =  getBoard((char*)((MainWindow*)data)->goal_input->value());
+      Board goal {Board(numbers)};
+      printf("\u001b[44mGoal saved");
+      printf("\u001b[0m : \n");
+  }else{
+      std::vector<int> numbers = {1,2,3,4,5,6,7,8,0};
+      Board goal {Board(numbers)};
+      printf("\u001b[44mGoal is default");
+      printf("\u001b[0m : \n");
+  }
+  if(((MainWindow*)data)->user_input_table->value() == ""){
+      Board start = ((MainWindow*)data)->board;
+  }else{
+      Board start = getBoard((char*)((char*)((MainWindow*)data)->user_input_table->value());
+  }
+  
+}
