@@ -1,11 +1,11 @@
 #include "traverse.h"
-//helper value
 
-void DFSTraverse(Board  start , Board  goal , int numberOflevels,int level ,Direction formerDirection ){
+//helper value
+DFSTraverseClass::DFSTraverseClass(){
+
+}
+std::vector<Board> DFSTraverseClass::DFSTraverse(Board  start , Board  goal , int numberOflevels,int level ,Direction formerDirection ){
     Board temp = start;
-    
-    static std::vector<Board> solution;
-    static bool finished = false;
     if(level < numberOflevels && start.getTable()!=goal.getTable()){
         if(formerDirection!=Direction::DOWN && start.moveEmptyTile(Direction::UP) && !finished){
             // std::cout << "UP\n";
@@ -46,20 +46,25 @@ void DFSTraverse(Board  start , Board  goal , int numberOflevels,int level ,Dire
             if(solution.size() > 0)
             solution.pop_back();
             if(level == 0 && !finished){
-                std::cout << "Ops I can't find solution\n";
+                solution.erase(solution.begin(),solution.end());
+                std::cout << "\u001b[41mOps I can't find solution";
+                std::cout << "\u001b[0m\n";
             }
             // std::cout << "Erase all" << std::endl;
             // solution.erase(solution.begin() , solution.end());
     }else{
         if(start.getTable()==goal.getTable()){
-            std::cout << "I found it\n";
+            std::cout << "\u001b[42mI found it";
+            std::cout << "\u001b[0m\n";
             // start.disp();
-            std::cout << "This is solution with "<< level <<" steps." << std::endl;
-            for (size_t i {0} ; i < solution.size() ; i++){
-                solution.at(i).disp();
-            }
-
-            finished = true;
+            // std::cout << "This is solution with "<< level <<" steps." << std::endl;
+            // for (size_t i {0} ; i < solution.size() ; i++){
+            //     solution.at(i).disp();
+            // }
+            finished=true;
+            final_solution = solution;
+            
+            
 
         }
         if(level >= numberOflevels) {
@@ -70,7 +75,9 @@ void DFSTraverse(Board  start , Board  goal , int numberOflevels,int level ,Dire
         
         
     }
-
+    
+    return final_solution;
+    
 }
 Node::Node(Board Table, Direction fatherDirection ){
     table = Table;
@@ -186,7 +193,7 @@ int checkRow(std::vector<Node> row,Board goal){
 }
 
 
-void BFSTraverse(Board start , Board goal,int numberOfLevel){
+std::vector<Board> BFSTraverse(Board start , Board goal,int numberOfLevel){
     bool isFinished=false;
     
     Node root {Node(start,Direction::NOTHING)};
@@ -232,14 +239,20 @@ void BFSTraverse(Board start , Board goal,int numberOfLevel){
     if(isFinished){
     std::vector<Board> solution{traceSolution(finalNode)};
     start.disp();
+    
     for(int i{(int)solution.size()-1} ; i >= 0 ; i --){
         std::cout << solution.size() - i << std::endl;
         solution.at(i).disp();
     }
+    return solution;
     }
     else{
+        std::vector<Board> nosolution;
+        
         printf("\u001b[47mI could not found it with this level");
         printf("\u001b[0m\n");
+
+        return nosolution;
     }
 }
 

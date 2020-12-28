@@ -18,10 +18,7 @@
 /**
  Show table to user
 */
-enum Method{
-  BFS,
-  DFS
-};
+
 
 class MainWindow : public Fl_Window {
 public:
@@ -41,7 +38,8 @@ public:
   std::vector<Fl_Box*> tiles;
   Fl_Input *number_of_level_input;
   Board board {Board()};
-  Method solve_method {Method::BFS};
+  std::vector<Board> solution;
+  int currentState{0};
   
 };
 #endif

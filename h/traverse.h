@@ -5,8 +5,16 @@
 #include <queue>
 #include <memory>
 #include "board.h"
-void DFSTraverse(Board  start , Board   goal  ,int numberOflevels, int level = 0  ,Direction formerDirection=Direction::NOTHING );
-void BFSTraverse(Board start , Board goal ,int numberOfLevel);
+std::vector<Board> BFSTraverse(Board start , Board goal ,int numberOfLevel);
+class DFSTraverseClass{
+public:
+    DFSTraverseClass();
+    std::vector<Board> DFSTraverse(Board  start , Board   goal  ,int numberOflevels, int level = 0  ,Direction formerDirection=Direction::NOTHING );
+private:
+    std::vector<Board> solution;
+    std::vector<Board> final_solution;
+    bool finished=false;
+};
 void A_StarTraverse(Board start , Board goal , int numberOfLevel);
 class Node{
     public:

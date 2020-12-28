@@ -46,6 +46,9 @@
         "array": "cpp",
         "cctype": "cpp",
         "iterator": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "chrono": "cpp",
+        "ratio": "cpp",
+        "thread": "cpp"
     }
 }
