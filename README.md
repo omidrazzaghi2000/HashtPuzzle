@@ -25,3 +25,5 @@ root@c5f118b55428:/usr/src/app#./main
 ```
 
 If all the things work correctly you must see below picture
+
+![AmirKabir](https://github.com/omidrazzaghi2000/HashtPuzzle/blob/master/stuff/Picture1.png)
